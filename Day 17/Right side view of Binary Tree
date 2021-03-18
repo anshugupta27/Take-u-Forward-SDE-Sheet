@@ -1,0 +1,20 @@
+https://leetcode.com/problems/binary-tree-right-side-view/
+
+class Solution {
+public:
+    void rightSideViewUtil ( TreeNode* root , int level , int *max_level , vector<int>&v ){
+        if ( !root ) return ; 
+        if ( level > *max_level ){
+            *max_level = level ; 
+            v.push_back ( root -> val ) ;
+        }
+        rightSideViewUtil ( root -> right , level+1 , max_level , v ) ;
+        rightSideViewUtil ( root -> left , level+1 , max_level , v ) ;
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        int level = 1 , max_level = 0 ;
+        vector<int> v; 
+        rightSideViewUtil ( root , level ,  &max_level , v ) ;
+        return v ; 
+    }
+};
