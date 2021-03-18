@@ -1,0 +1,29 @@
+https://practice.geeksforgeeks.org/problems/top-view-of-binary-tree/1
+
+vector<int> topView(struct Node *root)
+{
+    queue <pair<Node*, int>> q ; 
+    map < int , int > mp ; 
+    vector < int> v; 
+    q.push (make_pair(root,0));
+    while ( !q.empty() ){
+        pair<Node*,int> p = q.front() ; 
+        q.pop() ; 
+        Node*key = p.first ; 
+        int hd = p.second ; 
+        if ( mp[hd] == NULL ){
+            
+            mp[hd] = key->data ;
+        }
+        if( key -> left ){
+            q.push ( make_pair (key -> left , hd-1 ) ) ;
+        }
+        if ( key -> right ){
+            q.push ( make_pair ( key -> right , hd+1 ) ) ;
+        }
+    }
+    for ( auto i : mp ){
+        v.push_back (i.second) ;
+    }
+    return v ; 
+}
