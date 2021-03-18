@@ -1,0 +1,17 @@
+https://leetcode.com/problems/binary-tree-postorder-traversal/
+
+
+class Solution {
+public:
+    void postorderTraversalRecursive ( TreeNode* root , vector<int> &v ){
+        if ( !root ) return ; 
+        postorderTraversalRecursive ( root -> left , v ) ;
+        postorderTraversalRecursive ( root -> right , v ) ;
+        v.push_back ( root -> val ) ;
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector <int> v ; 
+        postorderTraversalRecursive ( root , v ) ;
+        return v; 
+    }
+};
