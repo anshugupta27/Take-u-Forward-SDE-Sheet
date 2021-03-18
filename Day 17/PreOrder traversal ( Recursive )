@@ -1,0 +1,17 @@
+https://leetcode.com/problems/binary-tree-preorder-traversal/
+
+
+class Solution {
+public:
+    void preorderTraversalRecursive ( TreeNode* root , vector < int > &v ){
+        if ( !root ) return ; 
+        v.push_back ( root -> val ) ;
+        preorderTraversalRecursive ( root -> left , v ) ;
+        preorderTraversalRecursive ( root -> right , v ) ;
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector < int > v ; 
+        preorderTraversalRecursive ( root , v ) ;
+        return v ; 
+    }
+};
