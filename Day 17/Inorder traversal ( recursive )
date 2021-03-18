@@ -1,0 +1,18 @@
+https://leetcode.com/problems/binary-tree-inorder-traversal/
+
+
+class Solution {
+public:
+    void inorderTraversalRecursive ( TreeNode* root , vector<int> &v ){
+        if ( !root ) return ; 
+        inorderTraversalRecursive ( root -> left , v ) ;
+        v.push_back ( root -> val ) ;
+        inorderTraversalRecursive ( root -> right , v ) ;     
+        
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector <int> v ; 
+          inorderTraversalRecursive ( root , v ) ;
+          return v ; 
+    }
+};
