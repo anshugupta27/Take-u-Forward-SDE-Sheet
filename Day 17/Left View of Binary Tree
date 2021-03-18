@@ -1,0 +1,16 @@
+https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+
+void leftViewUtil ( Node* root , int val , int *cnt ) {
+    if ( !root ) return ; 
+    if ( val > *cnt ){
+        *cnt = val ; 
+        cout << root -> val ;
+    }
+    leftViewUtil ( root -> left, val+1 , cnt ) ;
+    rightViewUtil ( root -> right , val+1 , cnt ) ;
+}
+
+void leftView ( Node* root ) {
+    int val = 1 , cnt = 0 ; 
+    leftViewUtil ( root , val , &cnt ) ;
+}
