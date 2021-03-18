@@ -1,0 +1,25 @@
+https://leetcode.com/problems/binary-tree-preorder-traversal/submissions/
+
+class Solution {
+public:
+    vector<int> preorderTraversalIterative ( TreeNode* root ){
+        stack <TreeNode* > stk ; 
+        vector < int > v; 
+        unordered_map<TreeNode*,int> mp ;
+        stk.push ( root ) ;
+        while ( !stk.empty() ){
+            TreeNode* curr = stk.top() ;
+            if ( !curr ){stk.pop();continue;}
+            else if ( mp[curr] == 0 ) v.push_back ( curr -> val ) ;
+            else if ( mp[curr] == 1 ) stk.push ( curr -> left ) ;
+            else if ( mp[curr] == 2 ) stk.push ( curr -> right ) ;
+            else stk.pop() ;
+            mp[curr]++ ;
+            
+        }
+        return v ; 
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+       return preorderTraversalIterative ( root ) ;
+    }
+};
