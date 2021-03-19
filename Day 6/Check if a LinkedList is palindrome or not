@@ -1,0 +1,19 @@
+bool isPalindromeUtil ( ListNode** left , ListNode* right )
+    {
+        if ( !right )
+            return true ; 
+        bool val = isPalindromeUtil ( left , right -> next ) ;
+        if ( val == false )
+            return false ; 
+        bool val1 = ( (*left) -> val == right -> val ) ;
+             
+        (*left) = (*left) -> next ; 
+        return val1  ;
+    }
+    bool isPalindrome(ListNode* head) {
+        if ( head == NULL )
+            return true ; 
+        return isPalindromeUtil ( &head , head  ) ;
+        
+        
+    }
