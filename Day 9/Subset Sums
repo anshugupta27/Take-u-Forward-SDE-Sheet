@@ -1,0 +1,19 @@
+https://practice.geeksforgeeks.org/problems/subset-sums2234/1#
+
+    void subsetSumUtil ( vector<int>arr , int sum , int n , vector<int>&v ){
+        if ( n < 0 ){
+            v.push_back ( sum ) ;
+            return;
+            
+        }
+        subsetSumUtil ( arr , sum+arr[n] , n-1 , v   ) ;
+        subsetSumUtil ( arr ,  sum , n-1 , v  ) ;
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector <int> v ; 
+        int sum = 0 ; 
+        subsetSumUtil ( arr ,   sum , N-1 , v  ) ;
+        sort(v.begin() , v.end());
+        return v;
+    }
