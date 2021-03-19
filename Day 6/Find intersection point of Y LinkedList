@@ -1,0 +1,34 @@
+int get_length ( ListNode * head )
+    { 
+        int count = 1 ; 
+        while ( head -> next )
+        {
+            head = head -> next ;
+            count++ ;
+        }
+        return count ; 
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if ( !headA || !headB ) return NULL ; 
+        
+       int length1 = get_length ( headA );
+       int length2 = get_length ( headB );
+        
+        int diff = abs(length1 - length2);
+        if (length1 > length2 )
+            swap( headA , headB ) ;
+        
+        ListNode * pointer = headB ; 
+        int count = 0 ;
+        while ( pointer and count < diff ){
+            pointer = pointer -> next ; 
+            count++ ; 
+        }
+        while ( headA != pointer ){
+            headA = headA -> next ; 
+            pointer = pointer -> next ; 
+            
+        }
+        if ( headA == pointer ) return headA ; 
+        else return NULL ;
+    }
