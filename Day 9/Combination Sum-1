@@ -1,0 +1,29 @@
+https://leetcode.com/problems/combination-sum/
+
+void combinationSumUtil ( vector<int> candidates ,  int target , int n  , vector<int> temp , vector<vector<int>>&ans ){
+        if ( n < 0 ) return ; 
+        if ( target == 0 )
+        {
+            ans.push_back ( temp ) ;
+            return ;
+        }
+        if ( target - candidates[n] >= 0 ){
+            temp.push_back ( candidates[n] ) ;
+        combinationSumUtil ( candidates , target-candidates[n] , n , temp , ans ) ;
+        if ( temp.size() ) temp.pop_back(); 
+        }
+         
+     combinationSumUtil ( candidates , target , n-1 , temp , ans ) ;
+        
+       
+
+        
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> temp ; 
+        vector<vector<int>> ans ; 
+        int sum = 0 ; 
+        combinationSumUtil ( candidates ,target , candidates.size()-1 , temp , ans ) ;
+        return ans ; 
+    }
