@@ -1,0 +1,40 @@
+Node* copyRandomList(Node* head) {
+        if ( !head ) return head ; 
+        Node*temp = head ; 
+        while ( temp  )
+        {
+            Node *curr = temp ; 
+            Node *next1 = temp -> next ; 
+            Node *newnode = new Node ( temp -> val ) ;
+            curr -> next = newnode ; 
+            newnode -> next = next1 ; 
+            temp = next1  ; 
+            
+        }
+        Node* res = head -> next ; 
+        temp = head ; 
+        Node*clonenode , *next1 ; 
+        while ( temp )
+        {
+            
+            clonenode = temp -> next ; 
+            next1 = clonenode -> next ;
+             if ( temp -> random )                               
+            clonenode -> random  = temp -> random -> next ; 
+            else if ( !temp -> random )
+            clonenode -> random = NULL ; 
+            temp = next1 ; 
+        }
+        temp = head ; 
+        while ( temp )
+        {
+            Node*clonenode = temp -> next ; 
+            Node* next1 = clonenode-> next ; 
+            temp -> next = next1 ; 
+            if ( next1 )
+            clonenode -> next = next1-> next ; 
+            temp = next1 ; 
+        }
+        return res ; 
+        
+    }
