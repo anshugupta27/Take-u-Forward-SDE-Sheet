@@ -1,0 +1,56 @@
+https://leetcode.com/problems/implement-queue-using-stacks/
+
+class MyQueue {
+public:
+    /** Initialize your data structure here. */
+    stack<int> s ; 
+    MyQueue() {
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        s.push ( x ) ;
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+        stack < int> temp ; 
+        int val  ;
+        while ( !s.empty() ){
+            val = s.top();
+            temp.push ( val ) ;
+            s.pop();
+        }
+        if ( temp.size() )
+        temp.pop();
+        while ( !temp.empty() ){
+            s.push ( temp.top() ) ;
+            temp.pop();
+        }
+        return val ; 
+    }
+    
+    /** Get the front element. */
+    int peek() {
+        stack < int> temp ; 
+        int val  ;
+        while ( !s.empty() ){
+            val = s.top();
+            temp.push ( val ) ;
+            s.pop();
+        }
+        while ( !temp.empty() ){
+            s.push ( temp.top() ) ;
+            temp.pop();
+        }
+        return val ; 
+        
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return s.size() ? 0 : 1 ;
+        
+    }
+};
