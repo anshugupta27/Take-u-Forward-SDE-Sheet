@@ -1,0 +1,11 @@
+    void deleteNode(ListNode* node) {
+        if ( !node ) return ; 
+        else if ( node -> next )
+        {
+           
+            node -> val = node -> next -> val ;
+            node -> next = node -> next -> next ; 
+        }
+        return ; 
+        
+    }
