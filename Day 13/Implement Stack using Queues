@@ -1,0 +1,62 @@
+https://leetcode.com/problems/implement-stack-using-queues/
+
+class MyStack {
+public:
+    /** Initialize your data structure here. */
+    queue<int>q ; 
+    
+    MyStack() {
+        
+        
+    }
+    
+    /** Push element x onto stack. */
+    void push(int x) {
+        q.push(x) ;
+        
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    int pop() {
+        queue<int>temp ; 
+        int val ; 
+        
+        while ( !q.empty() ){
+            val = q.front() ; 
+            q.pop(); 
+            temp.push(val) ;
+        }
+        
+        while ( temp.size() > 1 ){
+           q.push ( temp.front() ) ;
+            temp.pop();
+        }
+            return val ;
+        
+    }
+    
+    /** Get the top element. */
+    int top() {
+         queue<int>temp ; 
+        int val ; 
+        
+        while ( !q.empty() ){
+            val = q.front() ; 
+            q.pop(); 
+            temp.push(val) ;
+        }
+        
+        while ( !temp.empty() ){
+           q.push ( temp.front() ) ;
+            temp.pop();
+        }
+            return val ;
+        
+    }
+    
+    /** Returns whether the stack is empty. */
+    bool empty() {
+        return q.size() ? 0 : 1 ;
+        
+    }
+};
