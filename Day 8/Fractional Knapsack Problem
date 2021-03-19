@@ -1,0 +1,40 @@
+struct knapsack{
+    int value ; 
+    int weight ; 
+    double ValueperWeight;
+};
+bool comparator ( knapsack k1 , knapsack k2 ){
+    if ( k1.ValueperWeight > k2.ValueperWeight ) return true ; 
+    return false; 
+}
+class Solution
+{
+    public:
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        knapsack knapsack[n];
+       for ( int i = 0 ; i < n ; i++ )
+       {
+           knapsack[i].value = arr[i].value ; 
+           knapsack[i].weight = arr[i].weight ;
+           knapsack[i].ValueperWeight = (((double)arr[i].value) /((double)arr[i].weight)) ;
+           
+       }
+       sort (knapsack , knapsack+n , comparator) ;
+       double ans = 0 ; 
+       for ( int i = 0 ; i < n and W > 0 ; i++ )
+       {
+           if ( W >= knapsack[i].weight ){
+               ans = ans + knapsack[i].value ; 
+               W = W - knapsack[i].weight ; 
+           }
+           else {
+               ans = ans + (knapsack[i].ValueperWeight*W) ;
+               W = 0 ; 
+           }
+       }
+       return ans ; 
+        
+    }
+        
+};
