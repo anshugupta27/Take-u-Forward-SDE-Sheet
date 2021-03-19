@@ -1,0 +1,26 @@
+
+
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+        n = n+1 ; 
+        ListNode* curr = head , *prev = head , *prev1 = head ; 
+        int count = 1  ; 
+        while ( count < n ){
+            prev1 = curr ; 
+            curr = curr -> next ; 
+            count++ ; 
+        }
+        
+        while ( curr and curr -> next )
+        {
+            curr = curr -> next ; 
+            prev = prev -> next ; 
+        }
+        if ( !curr ) {
+            head = prev -> next ; 
+            
+            
+        } 
+        else
+        prev -> next = prev -> next -> next ; 
+        return head ;
+    }
