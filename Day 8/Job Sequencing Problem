@@ -1,0 +1,40 @@
+bool comparator ( struct Job j1 , Job j2 ) {
+    if ( j1.profit > j2.profit ) return true ; 
+    return false ; 
+    
+}
+class Solution {
+    public:
+
+vector <int> JobScheduling ( Job arr[] , int n )
+{
+    sort ( arr , arr+n , comparator ) ;
+    int done[101] , count = 0 , ans = 0 ;
+    for ( int i = 0 ; i < 101 ; i++ ) done[i] = 0 ;
+    for ( int i = 0 ; i < n ; i++ )
+    {
+        if ( done[arr[i].dead] == 0 ){
+            ans = ans + arr[i].profit ; 
+            done[arr[i].dead] = 1 ; 
+            count++ ; 
+        }
+        else if (done[arr[i].dead] != 0){
+            int k = arr[i].dead;
+            
+            while ( k > 1 and done[k] == 1 ){
+                k-- ; 
+            }
+            if ( k >= 1 and done[k] == 0 )
+            {
+                done[k] = 1 ; 
+                ans = ans + arr[i].profit ; 
+                count++ ;
+            }
+        }
+    }
+    vector < int > v ; 
+    v.push_back ( count ) ;
+    v.push_back ( ans ) ;
+    return v ; 
+}
+};
