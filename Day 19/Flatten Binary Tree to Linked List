@@ -1,0 +1,27 @@
+https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if ( (!root) || ( !root -> left and !root -> right )) return  ; 
+        
+        if ( root -> left ){
+        
+            flatten ( root -> left ) ;
+            
+            // find the root which has no grandchildren 
+            
+            TreeNode* rightNode = root -> right ; 
+            root -> right = root -> left ; 
+            root -> left = NULL ; 
+            TreeNode* curr = root ; 
+            
+            while ( curr -> right ) curr = curr -> right ; 
+            
+            curr -> right = rightNode ; 
+            
+        }
+        
+        flatten ( root -> right ) ;
+    }
+};
