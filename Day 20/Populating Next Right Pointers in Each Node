@@ -1,0 +1,30 @@
+https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+
+class Solution {
+public:
+    void nextRightParent ( Node* root ){
+        if ( !root ) return ; 
+         if ( root -> left and root -> right )
+            root -> left -> next = root -> right ; 
+        
+        if ( root -> next ){
+           if ( root -> right )
+           root -> right -> next = root -> next -> left ;
+            
+            nextRightParent ( root -> next ) ;  
+        }
+        return ; 
+       
+    }
+    void connectUtil(Node* root) {
+       if ( !root ) return  ; 
+        nextRightParent ( root ) ;
+        connectUtil ( root -> left ) ;
+       
+    }
+    Node* connect ( Node* root )
+    {
+        connectUtil ( root ) ;
+        return root ;
+    }
+};
