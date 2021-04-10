@@ -1,0 +1,26 @@
+https://leetcode.com/problems/validate-binary-search-tree/
+
+class Solution {
+public:
+    bool isValidBSTUtil ( TreeNode* root , TreeNode*& prev )
+    {
+        if ( root )
+        {
+              // *** inorder 
+            //1. left 
+             if ( !isValidBSTUtil ( root -> left , prev ) ) return false  ;
+            // 2. data 
+             if ( prev and root -> val <= prev -> val ) return false ; 
+             prev = root ; 
+            //3.right 
+            return isValidBSTUtil ( root -> right , prev ) ;
+        }
+        return true ; 
+         
+           
+    }
+    bool isValidBST(TreeNode* root) {
+        TreeNode* prev = NULL ; 
+       return isValidBSTUtil ( root , prev ) ;
+    }
+};
