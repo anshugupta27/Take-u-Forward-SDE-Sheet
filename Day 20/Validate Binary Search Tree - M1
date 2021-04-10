@@ -1,0 +1,28 @@
+https://leetcode.com/problems/validate-binary-search-tree/
+
+class Solution {
+public:
+    void inorder ( vector<int> &v , TreeNode* root )
+    {
+        if ( !root ) return ; 
+        inorder ( v , root -> left ) ;
+        v.push_back ( root -> val ) ;
+        inorder ( v , root -> right ) ;
+        
+        
+    }
+    bool isBST ( vector<int> &v )
+    {
+        for ( int i = 0 ; i < v.size()-1 ; i++ )
+        {
+            if ( v[i] >= v[i+1] )
+                return false ; 
+        }
+        return true ; 
+    }
+    bool isValidBST(TreeNode* root) {
+        vector<int> v ;
+        inorder (v , root ) ;
+        return isBST ( v ) ;
+    }
+};
