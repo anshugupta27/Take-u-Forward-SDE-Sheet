@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1#
 
+Find the inorder predecessor,successor of a given Key in BST
+
 void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
 {
 if ( !root ) return ; 
