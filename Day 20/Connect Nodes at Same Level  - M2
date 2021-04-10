@@ -1,0 +1,41 @@
+https://practice.geeksforgeeks.org/problems/connect-nodes-at-same-level/1#
+
+class Solution
+{
+    public:
+    //Function to connect nodes at same level.
+    Node* belowChild ( Node* root )
+    {
+        if ( !root ) return NULL ; 
+        if ( root -> left ) return root -> left ; 
+        if ( root -> right ) return root -> right ; 
+        return belowChild ( root -> nextRight ) ;
+    }
+    void connect(Node *root)
+    {
+        if ( !root ) return ; 
+        Node* temp = root ; 
+       while ( root  )
+       {
+           if ( root -> left and root -> right ) root -> left -> nextRight = root -> right ; 
+           if ( root -> nextRight ) 
+           {
+               if ( root -> right and root -> nextRight -> left )
+               root -> right -> nextRight = root -> nextRight -> left ; 
+               else if ( root -> right and root -> nextRight -> right )
+               root -> right -> nextRight = root -> nextRight -> right ;
+               else if ( root -> left and root -> nextRight -> left )
+               root -> left -> nextRight = root -> nextRight -> left ;
+               else if ( root -> left and root -> nextRight -> right )
+               root -> left -> nextRight = root -> nextRight -> right ;
+               
+               
+           }
+           
+           root = root -> nextRight ; 
+       }
+       Node* val = belowChild ( temp ) ;
+       connect ( val  ) ;
+    }    
+      
+};
