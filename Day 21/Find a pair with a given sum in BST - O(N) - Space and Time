@@ -1,0 +1,28 @@
+https://leetcode.com/problems/two-sum-iv-input-is-a-bst/submissions/
+
+class Solution {
+public:
+    void createInorderArray ( TreeNode* root , vector<int> &v )
+    {
+      if ( !root ) return ;
+        createInorderArray ( root -> left , v ) ;
+        v.push_back ( root -> val ) ;
+        createInorderArray ( root -> right , v ) ;
+    }
+    bool isSum ( vector<int> &v , int k )
+    {
+        int low = 0 , high = v.size() - 1 ; 
+        while ( low < high )
+        {
+            if ( v[low] + v[high] == k ) return true ; 
+            if ( v[low] + v[high] < k ) low++ ; 
+            else if ( v[low] + v[high] > k ) high-- ;   
+        }
+        return false ; 
+    }
+    bool findTarget(TreeNode* root, int k) {
+        vector <int> v ;
+        createInorderArray ( root , v ) ;
+        return isSum ( v , k ) ;
+    }
+};
