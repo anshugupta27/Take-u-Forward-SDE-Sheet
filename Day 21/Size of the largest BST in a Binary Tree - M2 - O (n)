@@ -1,0 +1,45 @@
+//****************************** top to bottom : n*n : preorder *******************************************************
+//****************************** bottom to top : n  : postorder *******************************************************
+
+https://practice.geeksforgeeks.org/problems/largest-bst/1#
+
+// bottom to top approach : O ( n ) 
+
+struct info 
+{
+    int size ;
+    int max ; 
+    int min ; 
+    int ans ; 
+    bool isBST ; 
+};
+info largestBSTUtil ( Node* root )
+{
+    if ( !root ) return { 0 , INT_MIN , INT_MAX , 0 , true } ;
+    if ( !root -> left and !root -> right ) return { 1 , root-> data , root-> data , 1 , true } ;
+    info l = largestBSTUtil ( root -> left ) ;
+    info r = largestBSTUtil ( root -> right ) ;
+    
+    info ret ; 
+    ret.size = 1 + l.size + r.size ;
+    if ( l.isBST and r.isBST and l.max < root -> data and r.min > root -> data )
+    {
+        ret.max = max ({root -> data , l.max , r.max }) ;
+        ret.min = min ({root -> data , l.min , r.min }) ;
+        ret.ans = ret.size ;
+        ret.isBST = true ; 
+    }
+    else 
+    {
+        ret.isBST = false ;
+        ret.ans = max ( l.ans , r.ans ) ;
+    }
+    return ret ; 
+    
+}
+int largestBst(Node *root)
+{
+    
+    info val = largestBSTUtil ( root ) ;
+    return val.ans ;
+}
