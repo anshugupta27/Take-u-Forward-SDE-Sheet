@@ -1,3 +1,5 @@
+https://leetcode.com/problems/two-sum-iv-input-is-a-bst/submissions/
+
     bool findTarget(TreeNode* root, int k) {
        if ( !root ) return false ; 
       stack <TreeNode*> inorder ; 
