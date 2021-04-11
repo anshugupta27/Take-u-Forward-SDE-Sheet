@@ -1,0 +1,28 @@
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
+class Solution {
+public:
+    
+    void kthSmallestUtil ( TreeNode* root , int k , int &ans , TreeNode*& finalRoot )
+    {
+        if ( !root ) return ; 
+        kthSmallestUtil ( root -> left , k , ans , finalRoot ) ;
+        ans++ ; 
+        if ( ans == k )
+        {
+              finalRoot = root ; 
+              return ;
+        } 
+        kthSmallestUtil ( root ->  right , k , ans , finalRoot ) ;
+    }
+    
+    int kthSmallest(TreeNode* root, int k) {
+        
+        int ans = 0 ; 
+        TreeNode* finalAns = NULL ; 
+        kthSmallestUtil ( root , k , ans , finalAns ) ;
+        return finalAns -> val ; 
+        
+        
+    }
+};
