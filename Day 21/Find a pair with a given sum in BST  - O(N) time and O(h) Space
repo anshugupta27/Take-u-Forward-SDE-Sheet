@@ -1,0 +1,45 @@
+    bool findTarget(TreeNode* root, int k) {
+       if ( !root ) return false ; 
+      stack <TreeNode*> inorder ; 
+      stack <TreeNode*> revInorder ; 
+      
+      TreeNode* top1  , *top2 , *root1 = root , *root2 = root ; 
+      
+      
+      while ( 1 )
+      {
+          int flag = 0 ; 
+          while ( root1 )
+         {
+           inorder.push ( root1  ) ;
+           root1 = root1 -> left ; 
+         }
+         while ( root2 )
+        {
+          revInorder.push ( root2  ) ;
+          root2 = root2 -> right ; 
+        }
+        if ( inorder.empty() || revInorder.empty() ) return false ;
+        
+        top1 = inorder.top() ; 
+        top2 = revInorder.top() ;
+        
+      if ( top1 != top2 and (top1 -> val + top2 -> val) == k ) return true ; 
+      else if ( top1 != top2 and (top1 -> val + top2 -> val) < k )
+      {
+          flag = 1 ; 
+          inorder.pop() ; 
+          root1 = top1 -> right ; 
+      }
+      else if ( top1 != top2 and (top1 -> val + top2 -> val) > k ) {
+         flag = 1 ; 
+          revInorder.pop() ; 
+          root2 = top2 -> left ; 
+          
+      }
+          if ( !flag ) return false ; 
+       
+      }
+      return false ; 
+      
+    }
