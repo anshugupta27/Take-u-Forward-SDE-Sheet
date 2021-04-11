@@ -1,0 +1,33 @@
+//******************** top to bottom : O ( n*n ) : preorder *****************************
+//******************** bottom to top : O ( n ) : postorder *****************************
+
+
+// top to bottom approach O (n*n) 
+
+int BSTsize ( Node* root )
+{
+    if ( !root ) return 0 ; 
+    return 1 + BSTsize( root -> left ) + BSTsize ( root -> right ) ;
+}
+bool isBST ( Node* root , Node*& prev )
+{
+    if ( !root ) return true ; 
+    if ( !isBST ( root -> left , prev )) return false ;
+    if ( prev and root -> data <= prev -> data ) return false ; 
+    prev = root ; 
+    return isBST ( root -> right , prev ) ;
+    
+    
+}
+
+int largestBst(Node *root)
+{
+    Node* prev = NULL ; 
+    if ( isBST ( root , prev ) )
+    {
+        return BSTsize ( root ) ;
+    }
+   return max ( largestBst ( root -> left ) , largestBst ( root -> right ) ) ;
+    
+	
+}
