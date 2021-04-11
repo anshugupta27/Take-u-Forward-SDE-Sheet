@@ -1,0 +1,27 @@
+Find the inorder predecessor and successor of a given Key in BST. 
+Floor and Ceil in a BST
+
+https://www.geeksforgeeks.org/floor-and-ceil-from-a-bst/
+
+void floorCeilBSTHelper(Node* root, int key, int& floor, int& ceil)
+{
+ 
+    while (root) {
+ 
+        if (root->data == key) {
+            ceil = root->data;
+            floor = root->data;
+            return;
+        }
+ 
+        if (key > root->data) {
+            floor = root->data;
+            root = root->right;
+        }
+        else {
+            ceil = root->data;
+            root = root->left;
+        }
+    }
+    return;
+}
