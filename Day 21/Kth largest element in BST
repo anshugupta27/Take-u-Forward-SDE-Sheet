@@ -1,0 +1,25 @@
+https://practice.geeksforgeeks.org/problems/kth-largest-element-in-bst/1#
+
+class Solution
+{
+    public:
+    void kthLargestUtil ( Node* root , int K , int& ans , Node*& finalAns )
+    {
+        if ( !root ) return ; 
+        kthLargestUtil ( root -> right , K , ans , finalAns ) ;
+        ans++ ; 
+        if ( ans == K )
+        {
+            finalAns = root ; 
+            return ; 
+        }
+        kthLargestUtil ( root -> left , K , ans , finalAns ) ;
+    }
+    int kthLargest(Node *root, int K)
+    {
+        int ans = 0 ; 
+        Node* finalAns = NULL ; 
+        kthLargestUtil ( root , K , ans , finalAns ) ;
+        return finalAns -> data ; 
+    }
+};
