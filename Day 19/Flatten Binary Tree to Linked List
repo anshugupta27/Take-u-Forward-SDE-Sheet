@@ -5,7 +5,7 @@ public:
     void flatten(TreeNode* root) {
         if ( (!root) || ( !root -> left and !root -> right )) return  ; 
         
-        if ( root -> left ){
+        if ( root -> left ){  // linked list should be in preorder of tree
         
             flatten ( root -> left ) ;
             
