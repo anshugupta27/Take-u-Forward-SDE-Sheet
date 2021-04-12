@@ -1,0 +1,29 @@
+https://leetcode.com/problems/kth-largest-element-in-a-stream/
+
+class KthLargest {
+public:
+    priority_queue<int,vector<int>,greater<int>> minHeap ; 
+    int k ; 
+    KthLargest(int size, vector<int>& nums) {
+        k = size ; 
+        for ( int i = 0 ; i < nums.size() ; i++ )
+        {
+            int val = add ( nums[i] ) ;
+        }
+        
+    }
+    
+    int add(int val) {
+        if ( minHeap.size() < k ) minHeap.push ( val ) ;
+        else if ( minHeap.size() >= k )
+        {
+           
+            if ( val > minHeap.top() )
+            {
+                minHeap.pop() ; 
+                minHeap.push ( val ) ;
+            }
+        }
+        return minHeap.top() ;
+    }
+};
