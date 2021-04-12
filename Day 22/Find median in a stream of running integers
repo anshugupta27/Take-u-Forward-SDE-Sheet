@@ -1,0 +1,64 @@
+https://practice.geeksforgeeks.org/problems/find-median-in-a-stream-1587115620/1#
+
+class Solution
+{
+    public:
+    //Function to insert heap.
+    
+    priority_queue<int> maxHeap ; // all small values
+    priority_queue<int,vector<int>,greater<int>> minHeap ;  // all large values 
+    
+    
+    void insertHeap(int &x)
+    {
+        if ( maxHeap.size() == minHeap.size() )
+        {
+           if ( maxHeap.size() == 0 ) {
+               minHeap.push ( x ) ;
+                return ; 
+           }
+            else if ( x > getMedian() )
+            {
+                minHeap.push ( x ) ;
+            }
+            else 
+            maxHeap.push ( x ) ;
+        }
+        else if ( maxHeap.size() > minHeap.size() )
+        {
+            if ( x > getMedian() )
+            minHeap.push ( x ) ;
+            else
+            {
+                int max = maxHeap.top() ;
+                maxHeap.pop() ;
+                minHeap.push ( max ) ;
+                maxHeap.push ( x ) ;
+            }
+        }
+        else if ( maxHeap.size() < minHeap.size() )
+        {
+            if ( x < getMedian() )
+            maxHeap.push ( x ) ;
+            else
+            {
+                int min = minHeap.top() ;
+                minHeap.pop() ;
+                maxHeap.push ( min ) ;
+                minHeap.push ( x ) ;
+            }
+        }
+        
+    }
+    
+  
+    
+    //Function to return Median.
+    double getMedian()
+    {
+        if ( minHeap.size() == maxHeap.size() ) 
+        return (double(minHeap.top() - maxHeap.top()) / 2.0) + double(maxHeap.top());
+        
+        return minHeap.size() > maxHeap.size() ? minHeap.top() : maxHeap.top() ;
+    }
+};
