@@ -1,0 +1,69 @@
+https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1#
+
+#include <bits/stdc++.h>
+using namespace std;
+
+   int *findTwoElement(int *arr, int n) {
+        int val = arr[0] , v1 = 0 , v2 = 0  , flag = 0 ; 
+        static int ans[2] ; // declare this static else segmentation fault will come
+        for ( int i = 1 ; i < n ; i++ )
+        {
+            val = val xor arr[i] ;
+            
+        }
+        for ( int i = 1 ; i <= n ; i++ )
+        {
+            val = val xor ( i ) ;
+        }
+        int k = ffs ( val ) ; // 1 based indexing 
+        int set_bit = pow ( 2 , k-1 ) ;
+        //*** OR *** int set_bit = val & ~(val - 1);
+        for ( int i = 0 ; i < n ; i++ )
+        {
+            if ( (arr[i] & set_bit) )   // use & not &&(and)
+            v2 = v2 xor arr[i] ;
+            else
+            v1 = v1 xor arr[i] ;
+            
+        }
+        for ( int i = 1 ; i <= n ; i++ )
+        {
+            if (i & set_bit)   // use & not &&(and)
+            v2 = v2 xor i ; 
+            else 
+            v1 = v1 xor i ; 
+        }
+        for ( int i = 0 ; i < n ; i++ )
+        {
+            if ( arr[i] == v1 )
+            {
+                flag = 1 ; 
+                break ; 
+            }
+        }
+        if ( flag )
+        {
+            ans[0] = v1 ; 
+            ans[1] = v2 ; 
+        }
+        else 
+        {
+            ans[0] = v2 ; 
+            ans[1] = v1 ; 
+        }
+        
+        return ans ; 
+        
+    }
+    
+  int main() {
+	int n; 
+	cin >>  n ;
+	int arr[n] ;
+	for ( int i = 0 ; i < n ; i++ )
+	{
+		cin >> arr[i] ;
+	}
+	auto ans = findTwoElement(arr, n) ; 
+	cout << ans[0] << " " << ans[1] ;
+}
