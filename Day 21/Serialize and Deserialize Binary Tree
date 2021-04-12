@@ -1,0 +1,55 @@
+https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    
+    //preorder 
+    string serialize (TreeNode* root  ) { // preorder
+        if ( !root ) 
+        {
+             
+             return "." ;
+        }
+        
+        string s = "" ; 
+        s = s + to_string ( root -> val ) ; 
+        s += "," + serialize ( root -> left ) ;
+        s += "," + serialize ( root -> right  ) ;
+        return s ; 
+    }
+    
+    // Decodes your encoded data to tree.
+    //preorder
+    TreeNode* deserializeUtil ( vector<string> &s , int& i ) {  // if you dont not pass reference of vector then TLE will come
+        
+        if ( i >= s.size()) return NULL ;  
+        
+        string val = s[i++] ;
+        if ( val == "." ) return NULL ; 
+        
+        TreeNode* root = new TreeNode ( stoi(val) ) ;
+        
+        root -> left = deserializeUtil ( s , i ) ;
+        root -> right = deserializeUtil ( s , i ) ;
+        return root ; 
+    }
+    
+    TreeNode* deserialize(string data) {
+        
+        vector<string>v ; 
+        stringstream ss (data) ;
+        string node ; 
+        while ( getline(ss,node,','))
+        {
+            v.push_back ( node ) ;
+        }
+        int i = 0 ; 
+        TreeNode* root = deserializeUtil ( v , i ) ;
+        return root ; 
+        
+    }
+    
+    
+};
