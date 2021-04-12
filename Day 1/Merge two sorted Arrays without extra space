@@ -1,0 +1,32 @@
+https://leetcode.com/problems/merge-sorted-array/
+
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        
+        if ( !m )
+        {
+             nums1 = nums2 ; 
+            return ; 
+        }
+        int i2 = 0 ;
+        int i1 = m-1 ;
+        for ( ; i2 < n ; i2++ , i1++ )
+        {
+            if ( nums1[i1] > nums2[i2] )
+            {
+                int i = i1 ; 
+                while ( i >= 0 and nums1[i] > nums2[i2] )
+                {
+                    nums1[i+1] = nums1[i] ;
+                    i-- ; 
+                    
+                }
+                nums1[i+1] = nums2[i2] ;
+                
+            }
+            else
+            {
+                nums1[i1+1] = nums2[i2] ;
+            }
+            
+        }
+    }
