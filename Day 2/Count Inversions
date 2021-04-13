@@ -1,0 +1,17 @@
+https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
+
+long long int inversionCount(long long arr[], long long N)
+    {
+//Traverse through the array, and for every index, find the number of smaller elements on its right side of the array. This can be done using a nested loop. Sum up the counts for all index in the array and print the sum
+      long long int count = 0 ; 
+      for ( int i = 0 ; i < N ; i++ )
+       {
+          int j = i ; 
+          while ( j < N )
+          {
+            if ( arr[j++] < arr[i] )
+            count++ ; 
+          }
+        }
+     return count ; 
+    }
