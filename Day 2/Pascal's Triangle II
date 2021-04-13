@@ -1,0 +1,17 @@
+https://leetcode.com/problems/pascals-triangle-ii/
+
+class Solution {
+public:
+
+    vector<int> getRow(int rowIndex) {
+        // r-1 C c-1  = (n-i)/i 
+        vector<int> v ; 
+        long int n = rowIndex+1 , C = 1 ; 
+        for ( int i = 1 ; i <= n ; i++ )
+        {
+            v.push_back ( C ) ;
+            C = C * (n-i)/i ;
+        }
+        return v ; 
+    }
+};
