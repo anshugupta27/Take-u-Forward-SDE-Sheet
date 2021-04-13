@@ -1,0 +1,51 @@
+https://leetcode.com/problems/next-permutation/
+
+class Solution {
+public:
+    void reverse ( vector<int>& v , int low , int high )
+    {
+        while ( low < high )
+        {
+            swap ( v[low++] , v[high--] ) ;
+        }
+    }
+    void nextPermutation(vector<int>& nums) {
+        // algorithm : traverse from back side 
+        //step 1 : a[i] < a[i+1] => index1 = i+1 ; traverse from behind 
+        //step 2 : a[i] > a[index1] => index2 = i ; traverse from behing 
+        //step 3 : swap ( a[index1] , a[index2] ) 
+        //step 4 : reverse ( index1+1 , index2 ) ;
+        
+        int index1 = -1 , index2 ;
+        
+        // Step 1 :
+        for ( int i = nums.size()-1 ; i > 0 ; i-- )
+        {
+            if ( nums[i-1] < nums[i] )
+            {
+                index1 = i-1 ; 
+                break ; 
+            }
+        }
+        
+        // Step 2 :
+        if ( index1 != -1 )
+        {
+            for ( int i = nums.size()-1 ; i >= index1 ; i-- )
+           {
+             if ( nums[i] > nums[index1] )
+            {
+                index2 = i ; 
+                break ; 
+            }
+           }
+            
+            // step 3 : 
+            swap ( nums[index1] , nums[index2] ) ;
+        }
+        
+        // step 4 : 
+        reverse ( nums , index1+1 , nums.size() - 1 ) ;
+        
+    }
+};
