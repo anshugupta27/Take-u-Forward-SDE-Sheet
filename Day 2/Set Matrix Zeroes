@@ -1,0 +1,54 @@
+https://leetcode.com/problems/set-matrix-zeroes/
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        bool rightZero = false , downZero = false ; 
+        // use this below for loop for the test case or similar 
+        // 1 1 1 
+        // 1 0 1 
+        // 1 1 1
+        for ( int i = 0 ; i < matrix.size() ; i++ )
+        {
+            for ( int j = 0 ; j < matrix[i].size() ; j++ )
+            {
+                if ( matrix[0][j] == 0 )
+                    rightZero = true ; 
+                if ( matrix[i][0] == 0 )
+                    downZero = true ; 
+               
+            }
+        }
+        for ( int i = 1 ; i < matrix.size() ; i++ )
+        {
+            for ( int j = 1 ; j < matrix[i].size() ; j++ )
+            {
+               
+                if ( matrix[i][j] == 0 )
+                {
+                    matrix[0][j] = 0 ;
+                    matrix[i][0] = 0 ;
+                }
+            }
+        }
+        
+       
+        // we are doing reverse traversal of the matrix because of this test case or similar  
+        // 0 1 1 
+        // 1 1 1 
+        // 1 1 1 
+        for ( int i = matrix.size()-1 ; i >= 0 ; i-- )
+        {
+            for ( int j = matrix[i].size()-1 ; j >= 0  ; j-- )
+            {
+                if ( i == 0 and rightZero == true )
+                    matrix[0][j] = 0 ; 
+                else if ( j == 0 and downZero == true )
+                    matrix[i][0] = 0 ;
+                else if ( i != 0 and j != 0 and (matrix[0][j] == 0 || matrix[i][0] == 0) )
+                    matrix[i][j] = 0 ;
+            }
+        }
+        
+    }
+};
