@@ -1,0 +1,28 @@
+https://leetcode.com/problems/longest-consecutive-sequence/
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if ( nums.empty()) return 0 ; 
+       unordered_map<int,int> mp ; 
+        int maxAns = 1 , count = 1 ; 
+        for ( int i = 0 ; i < nums.size() ; i++ )
+            mp[nums[i]]++ ;
+        
+        for ( int i = 0 ; i < nums.size() ; i++ )
+        {
+            if ( mp.find(nums[i]-1) == mp.end() )
+            {
+                count = 1 ;
+                int k = 1 ;
+                while ( mp.find(nums[i]+k) != mp.end())
+                {
+                    count++ ; 
+                    ++k ; 
+                }
+            }
+            maxAns = max ( maxAns , count ) ;
+        }
+        return maxAns ; 
+    }
+};
