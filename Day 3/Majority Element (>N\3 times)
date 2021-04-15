@@ -1,0 +1,49 @@
+https://leetcode.com/problems/majority-element-ii/submissions/
+
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        // Boyer moore voting algorithm
+        int majority1 = -1 , count1 = 0 , majority2 = -1 , count2 = 0 ; 
+        vector<int> v ; 
+        for ( auto it : nums  )
+        {
+            if ( it == majority1 ) count1++ ; 
+            else if ( it == majority2 ) count2++ ; 
+            else if ( count1 == 0 )
+            {
+                majority1 = it ; 
+                count1 = 1 ; 
+            }
+            else if ( count2 == 0 )
+            {
+                majority2 = it ; 
+                count2 = 1 ; 
+            }
+            else 
+            {count1-- ; count2-- ;} 
+           
+        }
+    int k = floor (nums.size()/3) , flag1 = 1 , flag2 = 1 , num1 = 0 , num2 = 0 ;
+        for ( int i = 0 ; i < nums.size() ; i++ )
+        {
+            if ( nums[i] == majority1 ) num1++ ; 
+            else if ( nums[i] == majority2 ) num2++ ; 
+            if ( num1 > k and flag1 )
+            {
+                v.push_back ( majority1 ) ;
+                    flag1 = 0 ; 
+            }
+            if ( num2 > k and flag2 )
+            {
+                v.push_back ( majority2 ) ;
+                flag2 = 0 ; 
+            }
+            
+                
+        }
+    
+        return v ; 
+        
+    }
+};
