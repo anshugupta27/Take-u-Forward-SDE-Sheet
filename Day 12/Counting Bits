@@ -1,0 +1,35 @@
+https://leetcode.com/problems/counting-bits/
+
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        queue<int> q ; 
+        vector<int> v ;
+        q.push ( 1 ) ;
+        v.push_back ( 0 ) ;
+        if ( num == 0 ) return v ; 
+        v.push_back ( 1 ) ;
+        int count = 1 ; 
+        while ( !q.empty() )
+        {
+            int front = q.front() ;
+            q.pop() ;
+            
+            // left tree : no increment in 1 
+            if ( count >= num ) break ; 
+            v.push_back ( front ) ;
+            count++ ; 
+            
+            // right tree : increment in 1 
+            if ( count >= num ) break ;
+            v.push_back ( front + 1 ) ;
+            count++ ; 
+            
+            
+            q.push ( front ) ;
+            q.push ( front + 1 ) ;
+            
+        }
+        return v ; 
+    }
+};
