@@ -1,0 +1,10 @@
+https://leetcode.com/problems/power-of-two/submissions/
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+    
+         // negative numbers and zero cannot be represented as a power of 2 
+        return n <= 0 ? 0 : !(n & (n-1)) ;
+    }
+};
