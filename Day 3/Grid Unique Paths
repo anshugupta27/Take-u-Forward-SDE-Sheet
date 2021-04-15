@@ -1,0 +1,17 @@
+https://leetcode.com/problems/unique-paths/submissions/
+
+class Solution {
+public:
+    int uniquePathsUtil ( int start , int end , int m , int n )
+    {
+        if ( start == m-1 and end == n-1 ) return 1 ; 
+        if ( start >= m || end >= n ) return 0 ; 
+        else return uniquePathsUtil ( start+1 , end , m , n ) + uniquePathsUtil ( start , end+1 , m , n ) ;
+    }        
+        
+
+    int uniquePaths(int m, int n) {
+        // recursion 
+        return uniquePathsUtil ( 0 , 0 , m , n )  ;
+    }
+};
