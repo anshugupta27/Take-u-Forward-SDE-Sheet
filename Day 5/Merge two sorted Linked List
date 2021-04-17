@@ -7,7 +7,7 @@
         //head1 points to smallest head 
         ListNode* curr1 = head1 , *curr2 = head2 ; 
         while ( curr1 != NULL and curr2 != NULL ){
-            prev1 = curr1 ;
+            
             if ( curr1 -> next and curr2 -> val >= curr1 -> val and curr2 -> val <= curr1 -> next -> val)
             {
                 ListNode*next1 = curr1 -> next ;
