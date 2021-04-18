@@ -1,3 +1,5 @@
+https://practice.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+
 bool comparator ( struct Job j1 , Job j2 ) {
     if ( j1.profit > j2.profit ) return true ; 
     return false ; 
