@@ -3,6 +3,13 @@ bool comparator ( struct Job j1 , Job j2 ) {
     return false ; 
     
 }
+struct Job
+{
+ int id ; 
+ int dead ; 
+ int profit ; 
+};
+
 class Solution {
     public:
 
