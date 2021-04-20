@@ -11,7 +11,7 @@ public:
     }
     void nextPermutation(vector<int>& nums) {
         // algorithm : traverse from back side 
-        //step 1 : a[i] < a[i+1] => index1 = i+1 ; traverse from behind 
+        //step 1 : a[i] < a[i+1] => index1 = i ; traverse from behind 
         //step 2 : a[i] > a[index1] => index2 = i ; traverse from behing 
         //step 3 : swap ( a[index1] , a[index2] ) 
         //step 4 : reverse ( index1+1 , index2 ) ;
