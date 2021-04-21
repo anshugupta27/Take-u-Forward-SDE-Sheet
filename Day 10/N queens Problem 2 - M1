@@ -1,0 +1,65 @@
+https://leetcode.com/problems/n-queens-ii/
+
+line : 62 
+
+
+class Solution {
+public:
+        // we are traversing each row and trying to place 1 queen in each row
+    // hence in inValid() function we need not check row condition in isValid() as we are filling only once per row . Also for top left- bottom right diagonal we dont need to check the diagonal below the current row as those rows are definitely unfilled  and similarly for other diagonal I think we can avoid some checks 
+    
+    bool isValid( int n , int row , int col , vector<string> &ans )
+    {
+        // checking the column of the current cell
+        for ( int i = 0 ; i < n ; i++ )
+        {
+            if ( ans[i][col] == 'Q' ) return false ; 
+        }
+        
+        // checking for top left to bottom diagonal but excluding the diagonal below the current element (+45 degree)
+        for ( int i = row , j = col ; i >= 0 and j >= 0 ; i-- , j-- )
+        {
+            if ( ans[i][j] == 'Q' ) return false ; 
+        }
+        
+        // checking for top right to bottom left diagonal but excliding the diagonal below the current element  (-45 degree)
+        for ( int i = row , j = col ; i >= 0 and j < n ; i-- , j++ )
+        {
+            if ( ans[i][j] == 'Q' ) return false ; 
+        }
+        
+        return true ; 
+    }
+    void solveNQueensUtil ( int n , int row  , vector<string> &a , vector<vector<string>> &finalans )
+    {
+        if ( row == n ) {
+            finalans.push_back ( a ) ;
+            return ; 
+        }
+        for ( int i = 0 ; i < n ; i++ )
+        {
+            if ( isValid ( n , row , i , a ) )
+            {
+                a[row][i] = 'Q' ;
+                solveNQueensUtil ( n , row+1 , a , finalans ) ;
+                a[row][i] = '.' ;
+            }
+        }
+        
+    }
+    int totalNQueens(int n) {
+        vector<vector<string>> finalans ; 
+        string temp = "" ;
+        for ( int i = 0 ; i < n ; i++ )
+            temp += '.' ;
+        
+        // vector v is of size n and each value is of n length with all '.'
+        // ["....(4) , ....(4) , ....(4) , ....(4)"] // size of the v is 4 but in each cell we again have a string of length 4 
+        
+        vector<string> v ( n , temp ) ;
+        
+        solveNQueensUtil ( n , 0 , v , finalans ) ;
+        return finalans.size() ;   // ********************************** everything is same just this line is the difference in n Queen 1 and n Queen 2 ******
+        
+    }
+};
