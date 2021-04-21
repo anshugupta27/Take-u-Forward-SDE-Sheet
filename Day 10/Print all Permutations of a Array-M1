@@ -1,0 +1,35 @@
+https://leetcode.com/problems/permutations/submissions/
+
+class Solution {
+public:
+    void permuteUtil ( vector<int>&nums , vector<int>&v , vector<vector<int>> &ans , int marked[] )
+    {
+        if ( v.size() == nums.size() )
+        {
+            ans.push_back ( v ) ;
+            return ; 
+        }
+        for ( int i = 0 ; i < nums.size() ; i++ )
+        {
+            if ( !marked[i] )
+            {
+                v.push_back ( nums[i] ) ;
+                marked[i] = 1 ; 
+                permuteUtil ( nums , v , ans , marked ) ;
+                v.pop_back() ;
+                marked[i] = 0 ; 
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<int> v ; 
+        vector<vector<int>> ans ; 
+        int marked[nums.size()] ;
+        for ( int i = 0 ; i < nums.size() ; i++ )
+        {
+            marked[i] = 0 ; 
+        }
+        permuteUtil ( nums , v , ans , marked ) ;
+        return ans ; 
+    }
+};
