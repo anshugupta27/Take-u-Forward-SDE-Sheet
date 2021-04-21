@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    void findPathUtil ( vector<vector<int>> &matrix , int n , int row , int col , string &v , vector<string> &finalAns  )
+    {
+        if ( row >= n || col >= n || matrix[row][col] == 0 ) return ;
+        
+        if ( row == n-1 and col == n-1 )
+        {
+            finalAns.push_back ( v ) ;
+            return ; 
+        }
+         
+        
+        if ( row < n and col < n and matrix[row][col] != 0 )
+        {
+            v.push_back ( 'D' ) ;
+            findPathUtil ( matrix , n , row+1 , col , v , finalAns ) ;
+            v.pop_back() ;
+            
+            v.push_back ( 'R' ) ;
+            findPathUtil ( matrix , n , row , col+1 , v , finalAns ) ;
+            v.pop_back() ;
+        }
+    }
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        string v = ""; 
+        vector<string> finalAns ; 
+        findPathUtil ( m , n , 0 , 0 , v , finalAns ) ;
+        return finalAns ; 
+    }
+};
