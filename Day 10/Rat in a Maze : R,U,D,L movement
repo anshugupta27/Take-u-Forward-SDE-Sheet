@@ -1,0 +1,38 @@
+https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1#
+
+class Solution{
+    public:
+    void findPathUtil ( vector<vector<int>> &matrix , int n , int row , int col , string v , vector<string> &finalAns )
+    {
+         if ( row < 0 || col < 0 || row >= n || col >= n || matrix[row][col] != 1 ) return ;
+         
+         if ( row == n-1 and col == n-1 )
+        {
+            
+            finalAns.push_back ( v ) ;
+            return ; 
+        }
+        
+       
+            matrix[row][col] = -1 ;
+            
+            findPathUtil ( matrix , n , row+1 , col , v+"D" , finalAns ) ;
+            
+            findPathUtil ( matrix , n , row , col+1 , v+"R" , finalAns ) ;
+            
+            findPathUtil ( matrix , n , row-1 , col , v+"U" , finalAns ) ;
+           
+            findPathUtil ( matrix , n , row , col-1 , v+"L" , finalAns  ) ;
+         
+            matrix[row][col] = 1 ; 
+        
+    }
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        string v = ""; 
+        vector<string> finalAns ; 
+        
+        findPathUtil ( m , n , 0 , 0 , v , finalAns ) ;
+        sort ( finalAns.begin() , finalAns.end() ) ;
+        return finalAns ; 
+    }
+};
