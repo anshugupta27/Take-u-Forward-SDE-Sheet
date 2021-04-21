@@ -1,5 +1,8 @@
 https://leetcode.com/problems/permutations/submissions/
 
+time : O(n * n!)
+Space : O (n) + O(n)
+
 class Solution {
 public:
     void permuteUtil ( vector<int>&nums , vector<int>&v , vector<vector<int>> &ans , int marked[] )
