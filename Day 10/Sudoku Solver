@@ -1,0 +1,94 @@
+https://leetcode.com/problems/sudoku-solver/
+
+class Solution {
+public:
+//      9*9 matrix 
+//      {   {-3,0,6,  -5,0,8,  -4,0,0}, 
+//          {5,2,0,    0,0,0,   0,0,0}, 
+//          {0,8,7,    0,0,0,   0,3,1}, 
+      
+//          {-0,0,3,  -0,1,0,   -0,8,0}, 
+//          {9,0,0,    8,6,3,    0,0,5}, 
+//          {0,5,0,    0,9,0,    6,0,0}, 
+      
+//          {-1,3,0,  -0,0,0,   -2,5,0}, 
+//          {0,0,0,    0,0,0,    0,7,4}, 
+//          {0,0,5,    2,0,6,    3,0,0} }
+    
+//     the cells marked with negative are the starting cell for the 3*3 matrixes 
+//     for any cell(i,j) if we want to find the starting cell of that 3*3 matrix then :
+//     starti = 3*(i/3) , startj = 3*(j/3)
+    
+    vector<vector<char>>ans ; 
+    bool isValid ( vector<vector<char>> &board , int row , int col , char val )
+    {
+        // checking the entire row of the cell 
+        for ( int i = 0 ; i < board.size() ; i++ )
+        {
+            if ( board[row][i] == val ) return false ; 
+        }
+        
+        // checking the entire column if the cell 
+        for ( int i = 0 ; i < board.size() ; i++ )
+        {
+            if ( board[i][col] == val ) return false ; 
+        }
+        
+        // checking the 3*3 matrix 
+        int starti = (row/3) * 3 ; 
+        int startj = (col/3) * 3 ;
+        for ( int i = 0 ; i < 3 ; i++ )
+        {
+            for ( int j = 0 ; j < 3 ; j++ )
+            {
+                if ( board[starti+i][startj+j] == val ) return false ; 
+            }
+        }
+        
+        return true ; 
+    }
+    
+    void solveSudokuUtil ( vector<vector<char>> &board , int row , int col )
+    {
+        if ( row == 9 ) {
+            ans = board ; 
+            return ; 
+        } 
+        int ni = 0 , nj = 0 ; 
+        
+        if ( col == 8 )
+        {
+            ni = row + 1 ;
+            nj = 0 ; 
+        }
+        else 
+        {
+            ni = row ; 
+            nj = col + 1 ; 
+        }
+        
+        if ( board[row][col] != '.' )
+            solveSudokuUtil ( board , ni , nj ) ; // recursion using the updated values of row and column 
+        else 
+        {
+            for ( int i = 1 ; i <= 9 ; i++ )
+          {
+            if ( isValid ( board , row , col , i+'0' ) )
+            {
+                
+               board[row][col] = i+'0' ; 
+                solveSudokuUtil ( board , ni , nj ) ; // recursion using the updated values of row and column 
+                board[row][col] = '.' ; 
+            }
+          }
+        }
+        
+        
+        
+    }
+    void solveSudoku(vector<vector<char>>& board) {
+        solveSudokuUtil ( board , 0 , 0 ) ;
+        board = ans ; 
+        
+    }
+};
