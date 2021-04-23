@@ -42,7 +42,7 @@ int main()
    	range += a[i] ;
 
    int target = ( x + range ) / 2 ;  // now search for any subset with sum equal to target then automatically the other subset will be range-x
-
+   if ( (x + range) % 2 != 0 ) return 0 ; 
    cout << countDifference ( a , n , target ) ;
 	
 }
