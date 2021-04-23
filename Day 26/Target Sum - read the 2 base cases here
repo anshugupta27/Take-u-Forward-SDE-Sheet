@@ -1,5 +1,6 @@
 https://leetcode.com/problems/target-sum/
 
+read the 2 base cases over here and apply them in all the knapsack varitations where it is asked to find the number of subset with a particular target
 class Solution {
 public:
 // this cpp solution is accepted on leetcode:
