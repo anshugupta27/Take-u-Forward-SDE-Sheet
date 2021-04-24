@@ -1,0 +1,55 @@
+https://leetcode.com/problems/palindrome-partitioning-ii/
+
+class Solution {
+public:
+    int dp[2005][2005] ;
+    bool isPalindrome ( string s , int i , int j )
+    {
+        if ( i == j || i > j ) return true ; 
+        while ( i < j )
+        {
+            if ( s[i] != s[j] ) return false ; 
+            i++ , j-- ; 
+        }
+        return true ; 
+    }
+    int minCutUtil ( string s , int i , int j )
+    {
+        if ( i > j ) return 0 ; 
+        
+        if ( dp[i][j] != -1 ) return dp[i][j] ;
+        if ( i == j || isPalindrome ( s , i , j ) ) return dp[i][j] = 0 ; 
+        int Min = INT_MAX ; 
+        for ( int k = i ; k <= j-1 ; k++ )
+        {
+            int left = 0 , right = 0 ; 
+            if ( dp[i][k] != -1 )
+            left = dp[i][k] ;
+            else
+            {
+            left = minCutUtil ( s , i , k ) ;
+            dp[i][k] = left ; 
+            }
+            
+            if ( dp[k+1][j] != -1 )
+            right = dp[k+1][j] ;
+            else
+            {
+                right = minCutUtil ( s , k+1 , j ) ;
+                dp[k+1][j] = right ; 
+            }
+            
+            int temp = 1 + right + left ; 
+            //OR 
+          //int temp = 1 + minCutUtil ( s , i , k ) + minCutUtil ( s , k+1 , j ) ;
+            Min = min ( Min , temp ) ;
+        }
+        return dp[i][j] = Min ;
+        
+        
+    }
+    int minCut(string s) {
+        memset ( dp , -1. ,sizeof(dp) ) ;
+        return minCutUtil ( s , 0 , s.size()-1 ) ;
+    }
+};
