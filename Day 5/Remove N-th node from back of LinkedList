@@ -15,7 +15,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
             curr = curr -> next ; 
             prev = prev -> next ; 
         }
-        if ( !curr ) {
+        if ( !curr ) {   // base case : removing the nthe element from the end ie. 1st element from start
             head = prev -> next ; 
             
             
