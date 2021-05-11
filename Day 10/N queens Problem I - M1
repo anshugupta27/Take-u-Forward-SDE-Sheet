@@ -15,7 +15,7 @@ public:
             if ( ans[i][col] == 'Q' ) return false ; 
         }
         
-        // checking for top left to bottom diagonal but excluding the diagonal below the current element (+45 degree)
+        // checking for top left to bottom right diagonal but excluding the diagonal below the current element (+45 degree)
         for ( int i = row , j = col ; i >= 0 and j >= 0 ; i-- , j-- )
         {
             if ( ans[i][j] == 'Q' ) return false ; 
