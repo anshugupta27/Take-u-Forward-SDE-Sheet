@@ -1,0 +1,34 @@
+ https://leetcode.com/problems/word-break/
+ 
+ 
+ int wordBreakUtil ( string s , vector<string>&wordDict   )
+    {
+        int dp[s.length()+1] ;
+        for ( int i = 0 ; i <= s.length() ; i++ )
+        {
+            dp[i] = 0 ;
+        }
+        dp[0] = 1 ; 
+        
+        for ( int i = 1 ; i <= s.length() ; i++ )
+        {
+            for ( int j = 0 ; j < i ; j++ )
+            {
+                  string leftStr = s.substr( j , i-j ) ;
+                if ( dp[j] and find( wordDict.begin() , wordDict.end() , leftStr ) != wordDict.end() )
+                {
+                    dp[i] = 1 ;
+                    break ; 
+                }
+            }
+            
+            
+        }
+        return dp[s.length()] ;
+        
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+       
+        return wordBreakUtil ( s , wordDict   ) ;
+       
+    }
