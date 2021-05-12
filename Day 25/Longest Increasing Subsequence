@@ -1,0 +1,33 @@
+https://leetcode.com/problems/longest-increasing-subsequence/
+
+
+int lengthOfLISUtil ( vector<int> nums  )
+    {
+        int LIS[nums.size()] ;
+        for ( int i = 0 ; i < nums.size() ; i++ )
+            LIS[i] = 1 ; 
+        
+        int Max = 1 ; 
+        
+        for ( int i = 1 ; i < nums.size() ; i++ )
+        {
+            for ( int j = 0 ; j < i ; j++ )
+            {
+                if ( nums[i] > nums[j] )
+                {
+                    LIS[i] = max ( LIS[i] , 1 + LIS[j] ) ;    
+                    Max = max ( Max , LIS[i] ) ;
+                }
+            }
+           
+            
+            
+        }
+        return Max ; 
+    }
+    
+    int lengthOfLIS(vector<int>& nums) {
+       
+       return lengthOfLISUtil ( nums) ;
+       
+    }
