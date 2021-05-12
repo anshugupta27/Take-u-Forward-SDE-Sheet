@@ -12,7 +12,7 @@ public:
         for ( int k = i ; k <= j-1 ; k++ )
         {
             int temp = maxCoinsUtil ( nums , i , k ) + 
-                   maxCoinsUtil ( nums , k+1 , j ) +                                              nums[i-1]*nums[k]*nums[j] ;
+                   maxCoinsUtil ( nums , k+1 , j ) +  nums[i-1]*nums[k]*nums[j] ;
             
             Max = max ( temp , Max ) ;
         }
