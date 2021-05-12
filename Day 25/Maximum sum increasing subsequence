@@ -1,0 +1,28 @@
+https://practice.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1#
+
+int maxSumIS(int nums[], int n)  
+	{  
+	    int sumLIS[n] ;
+        
+        for ( int i = 0 ; i < n ; i++ )
+            sumLIS[i] = nums[i] ;
+        int Max = 0; 
+        
+        for ( int i = 1 ; i < n ; i++ )
+        {
+            for ( int j = 0 ; j < i ; j++ )
+            {
+                if ( nums[i] > nums[j] and sumLIS[i] < nums[i]+sumLIS[j] )
+                {
+
+                    sumLIS[i] = nums[i] + sumLIS[j] ;
+                    
+                }
+            }
+           
+        }
+        
+        for ( int i = 0 ; i < n ; i++ )
+        Max = max ( Max , sumLIS[i] ) ;
+        return Max ; 
+	}  
