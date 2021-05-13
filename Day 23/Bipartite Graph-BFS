@@ -1,0 +1,41 @@
+https://practice.geeksforgeeks.org/problems/bipartite-graph/1#
+
+
+
+bool isBipartiteBFS ( int V , int node , vector<int> adj[] , vector<int> &colour )
+{
+    // here no need to use visited vector as that work can be done with the colour vector 
+    colour[node] = 1; 
+    queue<int> q ; 
+    q.push ( node ) ;
+  
+    while ( !q.empty() )
+    {
+        int val = q.front() ;
+        q.pop() ;
+        for ( auto it : adj[val] )
+        {
+            if ( colour[it] == -1 )
+            {
+                colour[it] = 1 - colour[val] ;
+                q.push ( it ) ; 
+                
+            }
+            else if ( colour[it] == colour[val] ) return false ; 
+        }
+    }
+    return true ; 
+}
+	bool isBipartite(int V, vector<int>adj[]){
+	    
+	    vector<int> colour(V,-1) ;
+	    for ( int i = 0 ; i < V ; i++ )
+	    {
+	        if ( colour[i] == -1 )
+	        {
+	            // even if just one component return false then the whole graph is not bipartite
+	            if ( !isBipartiteBFS ( V , i , adj , colour  ) ) return false ; 
+	        }
+	    }
+	    return true ; 
+	}
