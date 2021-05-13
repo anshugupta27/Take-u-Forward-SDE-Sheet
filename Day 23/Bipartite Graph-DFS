@@ -1,0 +1,31 @@
+https://practice.geeksforgeeks.org/problems/bipartite-graph/1#
+
+
+bool isBipartiteDFS ( int V , int node , vector<int> adj[] , vector<int>&colour )
+{
+   
+    for ( auto it : adj[node] )
+    {
+        if ( colour[it] == -1 )
+        {
+            colour[it] = 1 - colour[node] ;
+            if ( !isBipartiteDFS ( V , it , adj , colour ) ) return false ; 
+        }
+        else if ( colour[it] == colour[node] ) return false ; 
+    }
+    return true ; 
+}
+	bool isBipartite(int V, vector<int>adj[]){
+	    
+	    vector<int> colour(V,-1) ;
+	    for ( int i = 0 ; i < V ; i++ )
+	    {
+	        if ( colour[i] == -1 )
+	        {
+	            colour[i] = 1 ; 
+	            // even if just one component return false then the whole graph is not bipartite
+	            if ( !isBipartiteDFS ( V , i , adj , colour  ) ) return false ; 
+	        }
+	    }
+	    return true ; 
+	}
