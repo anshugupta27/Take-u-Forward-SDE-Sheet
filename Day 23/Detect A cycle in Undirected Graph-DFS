@@ -1,0 +1,26 @@
+bool isCycleDFS ( int V , int node , int parent , vector<int> adj[] , vector<int>&visited )
+   {
+       visited[node] = 1 ; 
+       for ( auto it : adj[node] )
+       {
+           if ( !visited[it] )
+           {
+               if ( isCycleDFS ( V , it , node , adj , visited ) ) return true ; 
+           }
+           else if ( it != parent ) return true ; 
+          
+       }
+       return false ; 
+   }
+	bool isCycle(int V, vector<int>adj[])
+	{
+	    vector<int> visited(V,0) ;
+	    for ( int i = 0 ; i < V ; i++ )
+	    {
+	        if ( !visited[i] )
+	        {
+	            if ( isCycleDFS ( V , i , -1 ,  adj , visited ) ) return true ; 
+	        }
+	    }
+	    return false ; 
+	}
