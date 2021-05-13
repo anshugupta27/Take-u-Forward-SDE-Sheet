@@ -1,0 +1,27 @@
+void dfs ( int node , vector<int> &visited , vector<int>adj[] , vector<int>&finalDFS , int V )
+	{
+	    visited[node] = 1 ;
+	    finalDFS.push_back ( node ) ;
+	    for ( auto it : adj[node] )
+	    {
+	        if ( !visited[it] )
+	        {
+	            
+	            dfs ( it , visited , adj , finalDFS , V ) ;
+	        }
+	    }
+	}
+	vector<int>dfsOfGraph(int V, vector<int> adj[])
+	{
+	    vector<int> visited(V,0) ;
+	    vector<int> finalDFS ; 
+	    for ( int i = 0 ; i < V ; i++ )
+	    {
+	        if ( !visited[i] )
+	        {
+	           
+	            dfs ( i , visited , adj , finalDFS , V ) ;
+	        }
+	    }
+	    return finalDFS ; 
+	}
