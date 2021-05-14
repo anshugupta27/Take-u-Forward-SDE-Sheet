@@ -1,0 +1,30 @@
+https://www.geeksforgeeks.org/shortest-path-unweighted-graph/
+
+
+vector<int> shortestPathUtil ( int V , vector<int> adj[] , int src )
+{
+	vector<int> distance( V , INT_MAX ) ;
+	distance[src] = 0 ;
+	
+	queue<int> q ; 
+	q.push ( src ) ;
+	while ( !q.empty() )
+	{
+		int node = q.front() ; 
+		q.pop() ; 
+		for ( auto it : adj[node] )
+		{
+			if ( 1 + distance[node] < distance[it] )
+			{
+				distance[it] = 1 + distance[node] ;
+				q.push ( it ) ;
+			}
+		}
+	}
+	return distance ;
+}
+vector<int> shortesPath ( int V , vector<int> adj[] )
+{
+  int src = 0 ; 
+	return shortestPathUtil ( V , adj , src ) ;
+}
