@@ -1,0 +1,49 @@
+void topoSort ( int V , vector<pair<int,int>> adj[] , stack<int> &s , vector<int>&visited , int src )
+{
+	visited[src] = 1 ; 
+	for ( auto it : adj[src] )
+	{
+		if ( !visited[it] )
+		{
+			topoSort ( V , adj , s , visited , it ) ;
+		}
+
+	}
+	s.push ( src ) ;
+
+}
+shortestPathDAG ( int V , vector<pair<int,int>> adj[] )
+{
+   stack<int> s ;
+   vector<int> distance( V , INT_MAX ) ;
+   distance[0] = 0 ; 
+   vector<int> visited( V , 0 ) ;
+
+   for ( int i = 0 ; i < V ; i++ )
+   {
+   	if ( !visited[i] )
+   	{
+   		topoSort ( V , adj , s , visited , 0 ) ;
+   	}
+   }
+   
+   while ( !s.empty() )
+   {
+   	int node = s.top() ;
+   	s.pop() ;
+   	if ( distance[node] != INT_MAX )
+   	{
+   		for ( auto it : adj[node] )
+   		{
+   			if ( distance[node] + it.second < distance[it.first] )
+   			{
+   				distance[it.first] = distance[node] + it.second ;
+
+   			}
+   		}
+
+   	}
+   	
+   }
+
+}
