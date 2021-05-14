@@ -1,0 +1,40 @@
+//Dijkstra's Algorithm | Shortest Path in Undirected Graphs
+
+
+
+vector<int> shortestPathDijstra ( int nodes , vector<pair<int,int>> adj[] , int source )
+{
+	priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq ;
+	vector<int> distance( V , INT_MAX ) ;
+	distance[source] = 0 ;
+	pq.push ( { 0 , source } ) ;  // weight , node 
+	while ( !pq.empty() )
+	{
+		int node = pq.front().second ;
+		int weight = pq.front().first ; 
+		pq.pop() ;
+		for ( auto it : adj[node] )
+		{
+			if ( distance[node] + it.second < distance[it.first] )
+			{
+				distance[it.first] = distance[node] + it.second ; 
+				pq.push ( { it.second , it.first } ) ;
+			}
+		}
+	} 
+	return distance ; 
+}
+
+int main()
+{
+	int nodes, edges , u , v ; 
+	cin >> nodes >> edges ; 
+	for ( int i = 0 ; i < edges ; i++ )
+	{
+		cin >> u >> v >> weight ; 
+		adj[u].push_back ( { v , weight } ) ;
+		adj[v].push_back ( { u , weight } ) ;
+	}
+
+	return shortestPathDijkstra ( nodes , adj , 0 ) ;
+}
