@@ -31,7 +31,7 @@
         int ans = 0 , i ; 
         for ( i = 0 ; i < s.length() ; i++  )
         {
-            if ( mp[s[i]] < mp[s[i+1]] )
+            if ( mp[s[i]] < mp[s[i+1]] ) // IV
             {
                 ans = ans + mp[s[i+1]] - mp[s[i]] ;
                 i++ ; 
