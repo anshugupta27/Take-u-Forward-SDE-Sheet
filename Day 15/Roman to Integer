@@ -1,0 +1,46 @@
+ https://leetcode.com/problems/roman-to-integer/
+ 
+ 
+ 
+    // Notes
+    //----> I placed before V or X indicates one less, so four is IV (one less than 5) and 9 is IX (one less than 10).
+//----> X placed before L or C indicates ten less, so forty is XL (10 less than 50) and 90 is XC (ten less than a hundred).
+//----> C placed before D or M indicates a hundred less, so four hundred is CD (a hundred less than five hundred) and nine hundred is CM (a hundred less than a thousand).
+
+    
+    
+    // algo 
+    //Take symbol one by one from starting from index 0: 
+//If current value of symbol is greater than or equal to the value of next symbol, then add this value to the running total.
+//else subtract this value by adding the value of next symbol to the running total.
+    
+    void giveRank ( unordered_map <char,int> & mp )
+    {
+        mp['I'] = 1 ; 
+        mp['V'] = 5 ; 
+        mp['X'] = 10 ; 
+        mp['L'] = 50 ; 
+        mp['C'] = 100 ; 
+        mp['D'] = 500 ; 
+        mp['M'] = 1000 ; 
+    }
+    
+    int romanToInt(string s) {
+        unordered_map < char , int > mp ; 
+        giveRank ( mp ) ;
+        int ans = 0 , i ; 
+        for ( i = 0 ; i < s.length() ; i++  )
+        {
+            if ( mp[s[i]] < mp[s[i+1]] )
+            {
+                ans = ans + mp[s[i+1]] - mp[s[i]] ;
+                i++ ; 
+                continue ; 
+            }
+            
+                ans = ans + mp[s[i]] ;
+                
+        }
+       return ans ; 
+        
+    }
