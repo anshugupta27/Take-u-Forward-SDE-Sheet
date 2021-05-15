@@ -1,0 +1,39 @@
+https://leetcode.com/problems/longest-palindromic-substring/submissions/
+
+
+
+void expandRange ( int start , int end , int &MaxLength , int &startIndex , string s )
+    {
+        while ( start >= 0 and end < s.length() )
+        {
+            if ( s[start] != s[end] ) break ; 
+            --start , ++end ; 
+        }
+        if ( MaxLength < end-start-1 )
+        {
+            MaxLength = end-start-1 ;
+            startIndex = start+1 ; 
+        }
+        
+        
+    }
+    
+    
+    string longestPalindrome(string s) {
+    
+        // for every element assume it as the middle of palindrome and traverse to its left and right part to check if that mid point is actually the mid of a palindrome or not ...similary assume each element as middle and do the same but in case if the longest palindrome was of even length then wehave 2 mid points hence take the case that mid and mid+1 as start and end 
+        
+        if ( s.length() == 0 || s.length() == 1 ) return s ;  
+        int MaxLength = INT_MIN , startIndex ;
+        for ( int i = 0 ; i < s.length()-1 ; i++ )
+        {
+            expandRange ( i , i , MaxLength , startIndex , s ) ; // if the palindrom with i as middle is of odd length
+            expandRange ( i , i+1 , MaxLength , startIndex , s ) ; // if the palindrome with even length will have i and i+1 ans the middle 
+        }
+        
+        string str ; 
+        for ( int i = startIndex ; i < MaxLength + startIndex ; i++ )
+            str += s[i] ;
+         return str ; 
+        
+    }
