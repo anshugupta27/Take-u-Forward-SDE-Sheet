@@ -1,5 +1,6 @@
 https://leetcode.com/problems/longest-palindromic-substring/submissions/
 
+video ->> https://www.youtube.com/watch?v=DK5OKKbF6GI
 
 
 void expandRange ( int start , int end , int &MaxLength , int &startIndex , string s )
