@@ -1,0 +1,26 @@
+https://leetcode.com/problems/implement-strstr/
+
+ 
+ int strStr(string haystack, string needle) {
+        if ( haystack == needle ) return 0 ; 
+        
+        int start = 0 , end = needle.length()-1 ;
+        string window ; 
+        
+        for ( int i = start ; i <= end ; i++ ) window += haystack[i] ;  // taking window of size needle string 
+       
+        for ( int i = end+1 ; i < haystack.length() ; i++ )
+        {
+            if ( window == needle ) return start ; 
+            
+            //removing the first character from the window 
+            start++ ; 
+            window.erase(window.begin()) ;
+            
+            //inserting one character in the window 
+            window += haystack[i] ;
+        }
+        if ( window == needle ) return start ; 
+        return -1 ; 
+        
+    }
