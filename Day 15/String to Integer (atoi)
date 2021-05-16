@@ -1,0 +1,28 @@
+https://leetcode.com/problems/string-to-integer-atoi/
+
+
+int myAtoi(string s) {
+        int i = 0 , sign  = 1 ; 
+       while ( s[i] == ' ' ) i++ ;    // removing white spaces 
+        
+        if ( s[i] == '-')            // sign 
+        {
+            sign = -1 ; 
+            i++ ; 
+        }
+        else if ( s[i] == '+' )
+        {
+            sign = 1 ; 
+            i++ ; 
+        }
+        
+        
+        long ans = 0 ; 
+        while ( s[i] >= '0' and s[i] <= '9' )            // detecting the number 
+        {
+            ans = ( ans * 10 ) + ( s[i++] - '0' ) ;
+            if ( ans * sign >= INT_MAX) return INT_MAX ; 
+            if ( ans * sign <= INT_MIN ) return INT_MIN ; 
+        }
+        return ans*sign ; 
+    }
