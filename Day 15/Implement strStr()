@@ -1,0 +1,17 @@
+https://leetcode.com/problems/implement-strstr/
+
+
+int strStr(string haystack, string needle) {
+        if ( haystack == needle ) return 0 ; 
+        for ( int i = 0 ; i < haystack.length() ; i++ )
+        {
+            int ptr1 = i , ptr2 = 0 ; 
+            while ( ptr1 < haystack.length() and ptr2 < needle.length() and haystack[ptr1] == needle[ptr2] )
+            {
+                ptr1++ , ptr2++ ; 
+            }
+            if ( ptr2 == needle.length() ) return i ;
+        }
+        
+        return -1 ; 
+    }
