@@ -1,0 +1,48 @@
+https://practice.geeksforgeeks.org/problems/special-stack/1
+
+
+int minEle ; 
+void push(stack<int>& s, int a){
+	if ( s.size() == 0 )
+	{
+	    minEle = a ; 
+	    s.push ( a ) ;
+	}
+	else 
+	{
+	    if ( a > minEle )
+	    s.push ( a ) ;
+	    else 
+	    {
+	        s.push ( 2*a - minEle ) ;
+	        minEle = a ; 
+	    }
+	}
+}
+
+bool isFull(stack<int>& s,int n){
+	return s.size() == n ? true : false ;
+}
+
+bool isEmpty(stack<int>& s){
+	return s.size() == 0 ? true : false ; 
+}
+
+int pop(stack<int>& s){
+    
+    if ( s.size() == 0 ) return -1 ; 
+    int ans = s.top() ; 
+    if ( s.top() < minEle )
+    {
+        ans = minEle ; 
+        minEle = 2*minEle - s.top() ;
+       
+    }
+     s.pop() ;
+    return ans ; 
+	
+}
+
+int getMin(stack<int>& s){
+	return minEle ; 
+}
