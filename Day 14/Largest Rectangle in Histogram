@@ -1,0 +1,71 @@
+https://leetcode.com/problems/largest-rectangle-in-histogram/
+
+
+   
+   struct pair
+    {
+        int index ; 
+        int height ; 
+    };
+    vector<int> smallestToLeftUtil ( vector<int> &heights )
+    {
+        vector<int> ans ; 
+        stack <pair> stk ;
+        for ( int i = 0 ; i < heights.size() ; i++ )
+        {
+            if ( stk.size() == 0 )
+                ans.push_back ( -1 ) ;
+            else if ( stk.size() > 0 and stk.top().height < heights[i] )
+                ans.push_back ( stk.top().index ) ;
+            else if ( stk.size() > 0 and stk.top().height >= heights[i] ) 
+            {
+                while ( stk.size() > 0 and stk.top().height >= heights[i] )
+                    stk.pop() ;
+                if ( stk.size() == 0 )
+                    ans.push_back ( -1 ) ;
+                else ans.push_back ( stk.top().index ) ;
+            }
+            stk.push ( {i , heights[i]} ) ;
+        }
+        return ans ; 
+    }
+    vector<int> smallestToRightUtil ( vector<int> &heights )
+    {
+        int n = heights.size() ;
+        vector<int> ans ; 
+        stack <pair> stk ; 
+        for ( int i = n-1 ; i >= 0 ; i-- )
+        {
+            if ( stk.size() == 0 )
+                ans.push_back ( n ) ;
+            else if ( stk.size() > 0 and stk.top().height < heights[i] )
+                ans.push_back ( stk.top().index ) ;
+            else if ( stk.size() > 0 and stk.top().height >= heights[i] ) 
+            {
+                while ( stk.size() > 0 and stk.top().height >= heights[i] )
+                    stk.pop() ;
+                if ( stk.size() == 0 )
+                    ans.push_back ( n ) ;
+                else ans.push_back ( stk.top().index ) ;
+            }
+            stk.push ( {i , heights[i]} ) ;
+        }
+        reverse ( ans.begin() , ans.end() ) ;
+        return ans ; 
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        vector<int> smallestToLeft = smallestToLeftUtil ( heights ) ;
+        vector<int> smallestToRight = smallestToRightUtil ( heights ) ;
+        
+        int Max = INT_MIN ; 
+        for ( int i = 0 ; i < heights.size() ; i++ )
+        {
+            int width = smallestToRight[i] - smallestToLeft[i] - 1 ;
+            int area = width * heights[i] ;
+            Max = max ( Max , area ) ;
+            
+        }
+        return Max ; 
+        
+        
+    }
