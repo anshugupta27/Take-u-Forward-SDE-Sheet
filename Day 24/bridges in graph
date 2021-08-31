@@ -3,17 +3,17 @@ using namespace std;
 void dfs(int node, int parent, vector<int> &vis, vector<int> &tin, vector<int> &low, int &timer, vector<int> adj[]) {
     vis[node] = 1; 
     tin[node] = low[node] = timer++; 
-    for(auto it: adj[node]) {
-        if(it == parent) continue;
+    for(auto child: adj[node]) {
+        if(child == parent) continue;
         
-        if(!vis[it]) {
-            dfs(it, node, vis, tin, low, timer, adj); 
-            low[node] = min(low[node], low[it]); 
-            if(low[it] > tin[node]) {
-                cout << node << " " << it << endl;
+        if(!vis[child]) {
+            dfs(child, node, vis, tin, low, timer, adj); 
+            low[node] = min(low[node], low[child]); 
+            if(low[child] > tin[node]) {
+                cout << node << " " << child << endl;
             }
         } else {
-            low[node] = min(low[node], low[it]); 
+            low[node] = min(low[node], low[child]); 
         }
     }
 }
