@@ -13,7 +13,7 @@ void dfs(int node, int parent, vector<int> &vis, vector<int> &tin, vector<int> &
                 cout << node << " " << it << endl;
             }
         } else {
-            low[node] = min(low[node], tin[it]); 
+            low[node] = min(low[node], low[it]); 
         }
     }
 }
