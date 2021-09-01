@@ -1,0 +1,42 @@
+video : https://www.youtube.com/watch?v=nV_wOZnhbog
+
+
+
+
+void floyd_warshall ( int graph[V][V])
+{
+  int dist[V][V] ;
+  for ( int i = 0; i < V; i++ )
+  {
+  	dist[i][j] = graph[i][j] ;
+  }
+
+  for ( int k = 0; k < V; k++)
+  {
+  	for ( int i = 0; i < V; i++ )
+  	{
+  		for ( int j = 0; j < V; j++ )
+  		{
+  			if ( dist[i][k] == INT_MAX || dist[k][j] == INT_MAX ) continue;
+  			else if ( dist[i][j] > dist[i][k]+dist[k][j] )
+  				dist[i][j] = dist[i][k] + dist[k][j] ;
+  		}
+  	}
+  }
+  for ( int i = 0; i < V; i++ )
+  {
+  	if ( dist[i][i] < 0 )
+  	{
+  		cout << "negative edge weight cycle if present" ;
+  		return ;
+  	}
+  }
+
+  for ( int i = 1; i < V; i++ )
+  {
+  	for ( int j = 0 ; j < V; j++ )
+  	{
+  		cout << i << " to " << j << " distance is " << dist[i][j] << "\n" ;
+  	}
+  }
+}
