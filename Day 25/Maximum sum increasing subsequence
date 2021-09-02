@@ -1,4 +1,6 @@
 https://practice.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1#
+video :  https://www.youtube.com/watch?v=5ToHur2XrA4
+
 
 int maxSumIS(int nums[], int n)  
 	{  
