@@ -1,5 +1,5 @@
 https://leetcode.com/problems/longest-increasing-subsequence/
-
+video: https://www.youtube.com/watch?v=odrfUCS9sQk
 
 int lengthOfLISUtil ( vector<int> nums  )
     {
