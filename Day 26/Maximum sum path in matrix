@@ -1,0 +1,33 @@
+https://practice.geeksforgeeks.org/problems/path-in-matrix3805/1
+video: https://www.youtube.com/watch?v=OCz6rm9Nh1o
+
+ int maximumPath(int N, vector<vector<int>> matrix)
+    {
+        int row = matrix.size() ;
+    int col = matrix[0].size() ;
+    for ( int i = 1 ; i < row ; i++ )
+    {
+        for ( int j = 0 ; j < col ; j++ )
+        {
+            int top = matrix[i-1][j] ;
+            int diagLeft = 0 , diagRight = 0 ; 
+            if ( j != 0 )
+            {
+                diagLeft = matrix[i-1][j-1] ;
+            }
+            if ( j != col-1 )
+            {
+                diagRight = matrix[i-1][j+1] ;
+            }
+            
+            matrix[i][j] = matrix[i][j] + max (top, max(diagLeft , diagRight) ) ;
+            
+        }
+    }
+    int maxAns = INT_MIN ; 
+    for ( int j = 0 ; j < col ; j++ )
+    {
+        maxAns = max ( maxAns , matrix[row-1][j] ) ;
+    }
+    return maxAns ;
+    }
