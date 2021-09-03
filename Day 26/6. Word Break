@@ -1,5 +1,11 @@
 https://leetcode.com/problems/word-break/
 
+when we are ate any index i, previous substring is guaranteed to be present in set/dictionary
+
+we need to check only from i to word.length() 
+
+if substring from i to length word.length() is presesnt in dictionary then set table[i+word.length()] to true
+
 
 bool wordBreak(string s, vector<string>& wordDict) {
         vector<bool> table(s.length() + 1, false);
