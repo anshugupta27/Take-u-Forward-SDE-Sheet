@@ -1,0 +1,59 @@
+https://leetcode.com/problems/maximum-profit-in-job-scheduling/
+
+video : https://www.youtube.com/watch?v=AxQjrWiOdkE
+
+struct Job
+    {
+        
+        int start ; 
+        int end ; 
+        int profit ; 
+        
+       
+    };
+
+     bool comparator ( struct Job &j1 , struct Job &j2 )
+    {
+        if ( j1.end < j2.end ) return true ; 
+        return false ; 
+    }
+
+class Solution {
+public:
+   
+    
+    
+    
+    
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+     
+        Job job[startTime.size()]  ;
+        for ( int i = 0 ; i < startTime.size() ; i++ )
+        {
+            job[i].start = startTime[i] ;
+            job[i].end = endTime[i] ;
+            job[i].profit = profit[i] ;
+        }
+        int n = startTime.size() ;
+        sort ( job , job+n , comparator ) ;
+        
+        int dp[startTime.size()] ;
+        memset ( dp , 0 , sizeof(dp)) ;
+        dp[0] = job[0].profit ; 
+        
+        
+        for ( int i = 1 ; i < startTime.size() ; i++ )
+        {
+            dp[i] = max ( job[i].profit , dp[i-1] ) ;
+            for ( int j = i-1 ; j >= 0 ; j-- )
+            {
+                if ( job[i].start >= job[j].end )
+                {
+                    dp[i] = max ( dp[i] , dp[j] + job[i].profit ) ;
+                    break ; 
+                }
+            }
+        }
+        return dp[startTime.size()-1] ;
+    }
+};
