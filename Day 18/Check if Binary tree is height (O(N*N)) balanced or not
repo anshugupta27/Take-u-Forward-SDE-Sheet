@@ -1,5 +1,5 @@
 https://leetcode.com/problems/balanced-binary-tree/
-
+O(N*N)
 class Solution {
 public:
     int height ( TreeNode* root ){
