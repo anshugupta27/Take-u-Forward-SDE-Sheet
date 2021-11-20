@@ -59,3 +59,47 @@ String s = "timetopractice";
         }
         System.out.println(maxLen);
         System.out.println("Start Index : " + maxStart +" End Index :" + maxEnd + ": "+ s.substring(maxStart,maxEnd));
+        
+        
+        
+        
+        
+        *********************************************************************************************************************************************
+        
+        
+        
+        
+          if(t=="")
+        return "";
+    
+   unordered_map<char,int> window,countT;
+    for(char c:t)
+        countT[c]++;
+    int have = 0,need = countT.size();
+    string ans;
+    int minlen = INT_MAX;
+    pair<int,int> p;
+    
+    int l = 0,r=0;
+    for(;r<s.size();r++){
+        char c = s[r];
+        window[c]++;
+        if(countT.find(c)!=countT.end() && countT[c]==window[c])
+            have+=1;
+        while(have==need){
+            if(minlen>r-l+1){
+                minlen = r-l+1;
+                p.first = l;
+                p.second = r;
+            }
+            char c = s[l];
+            window[c]--;
+            if(countT.find(c)!=countT.end() && window[c]<countT[c])
+                have-=1;
+            l++;
+        }
+    }
+    
+    ans = minlen!=INT_MAX?s.substr(p.first,minlen):"";
+    return ans;
+}
