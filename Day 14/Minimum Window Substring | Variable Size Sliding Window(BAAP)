@@ -1,6 +1,54 @@
 https://leetcode.com/problems/minimum-window-substring/
+https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/1/?track=mts-sliding-window&batchId=341
 
-
+ string smallestWindow (string s, string p)
+    {
+        // use unordered map else tle will come 
+        unordered_map<char,int> mp, smp;
+        string ans = "" ;
+        for ( int i = 0 ; i < p.size() ; i++ )
+        {
+            mp[p[i]]++ ;
+        }
+        int have = mp.size() ;
+        int want = 0 ;
+        int start = 0 , end = 0 ;
+         int minlen = INT_MAX;
+    pair<int,int> pr;
+         while ( end < s.size() )
+        {
+            // if you find in map again and again it will give tle 
+           smp[s[end]]++ ;
+           if ( mp.find(s[end]) != mp.end() and smp[s[end]] == mp[s[end]] )
+           want++ ;
+           
+           while ( have == want )
+           {
+         
+         // dont calculate substr everytime else TLE will come
+            if(minlen>end-start+1){
+                minlen = end-start+1;
+                pr.first = start;
+                pr.second = end;
+            }
+               
+               if ( mp.find(s[start]) != mp.end() and smp[s[start]] == mp[s[start]] ) 
+               want-- ;
+               smp[s[start]]-- ;
+               start++ ;
+           }
+         end++ ;
+           
+            
+        }
+ans = minlen!=INT_MAX?s.substr(pr.first,minlen):"-1";
+    return ans;
+        
+    }
+    
+    
+    
+    
 String s = "timetopractice";
         String t = "toct";
 
